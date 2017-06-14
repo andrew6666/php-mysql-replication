@@ -642,7 +642,12 @@ class RowEvent extends EventCommon
         $minute = $this->getBinarySlice($data, 28, 6, 40);
         $second = $this->getBinarySlice($data, 34, 6, 40);
 
-        $date = new \DateTime($year . '-' . $month . '-' . $day . ' ' . $hour . ':' . $minute . ':' . $second);
+        try {
+            $date = new \DateTime($year . '-' . $month . '-' . $day . ' ' . $hour . ':' . $minute . ':' . $second);
+        } catch (\Exception $exception) {
+            return null;
+        }
+        // not all errors are thrown as exception :(
         if (array_sum(\DateTime::getLastErrors()) > 0)
         {
             return null;
