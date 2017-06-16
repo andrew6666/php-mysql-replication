@@ -83,6 +83,8 @@ You can pass this array keys to ConfigService->makeConfigFromArray([]) or use Co
  
 'tableCacheSize' - some data are collected from information schema, this data is cached. This variable set cache for tables bigger takes more memory. (default 128 objects) 
 
+'heartbeatPeriod' - sets the interval in seconds between replication heartbeats. Whenever the master's binary log is updated with an event, the waiting period for the next heartbeat is reset. interval is a decimal value having the range 0 to 4294967 seconds. Heartbeats are sent by the master only if there are no unsent events in the binary log file for a period longer than interval. (default 0)
+
 
 Examples
 =========

@@ -77,6 +77,10 @@ class ConfigService
             {
                 $configBuilder->withTableCacheSize($v);
             }
+            if ('heartbeatPeriod' === $k)
+            {
+                $configBuilder->withHeartbeatPeriod($v);
+            }
         }
 
         return $configBuilder->build();

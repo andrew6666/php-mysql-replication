@@ -34,4 +34,6 @@ class ConfigException extends MySQLReplicationException
     const MARIADBGTID_ERROR_CODE = 11;
     const TABLE_CACHE_SIZE_ERROR_MESSAGE = 'Table cache must be integer';
     const TABLE_CACHE_SIZE_ERROR_CODE = 12;
+    const HEARTBEAT_PERIOD_ERROR_MESSAGE = 'Heartbeart period must be integer';
+    const HEARTBEAT_PERIOD_ERROR_CODE = 13;
 }

@@ -70,6 +70,10 @@ class Config
      * @var int
      */
     private $tableCacheSize;
+    /**
+     * @var int
+     */
+    private $heartbeatPeriod;
 
     /**
      * Config constructor.
@@ -88,6 +92,7 @@ class Config
      * @param array $tablesOnly
      * @param array $databasesOnly
      * @param int $tableCacheSize
+     * @param int $heartbeatPeriod
      */
     public function __construct(
         $user,
@@ -104,7 +109,8 @@ class Config
         array $eventsIgnore,
         array $tablesOnly,
         array $databasesOnly,
-        $tableCacheSize
+        $tableCacheSize,
+        $heartbeatPeriod
     ) {
         $this->user = $user;
         $this->host = $host;
@@ -121,6 +127,7 @@ class Config
         $this->databasesOnly = $databasesOnly;
         $this->mariaDbGtid = $mariaGtid;
         $this->tableCacheSize = $tableCacheSize;
+        $this->heartbeatPeriod = $heartbeatPeriod;
     }
 
     /**
@@ -181,6 +188,10 @@ class Config
         if (false === filter_var($this->tableCacheSize, FILTER_VALIDATE_INT, ['options' => ['min_range' => 0]]))
         {
             throw new ConfigException(ConfigException::TABLE_CACHE_SIZE_ERROR_MESSAGE, ConfigException::TABLE_CACHE_SIZE_ERROR_CODE);
+        }
+        if (false === filter_var($this->heartbeatPeriod, FILTER_VALIDATE_INT, ['options' => ['min_range' => 0]]))
+        {
+            throw new ConfigException(ConfigException::HEARTBEAT_PERIOD_ERROR_MESSAGE, ConfigException::HEARTBEAT_PERIOD_ERROR_CODE);
         }
     }
 
@@ -302,5 +313,13 @@ class Config
     public function getTableCacheSize()
     {
         return $this->tableCacheSize;
+    }
+
+    /**
+     * @return int
+     */
+    public function getHeartbeatPeriod()
+    {
+        return $this->heartbeatPeriod;
     }
 }

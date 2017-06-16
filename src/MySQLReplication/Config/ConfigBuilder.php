@@ -68,6 +68,10 @@ class ConfigBuilder
      * @var int
      */
     private $tableCacheSize = 128;
+    /**
+     * @var int
+     */
+    private $heartbeatPeriod = 0;
 
     /**
      * @param string $user
@@ -232,6 +236,14 @@ class ConfigBuilder
     }
 
     /**
+     * @param int $heartbeatPeriod
+     */
+    public function withHeartbeatPeriod($heartbeatPeriod)
+    {
+        $this->heartbeatPeriod = $heartbeatPeriod;
+    }
+
+    /**
      * @return Config
      */
     public function build()
@@ -251,7 +263,8 @@ class ConfigBuilder
             $this->eventsIgnore,
             $this->tablesOnly,
             $this->databasesOnly,
-            $this->tableCacheSize
+            $this->tableCacheSize,
+            $this->heartbeatPeriod
         );
     }
 }
