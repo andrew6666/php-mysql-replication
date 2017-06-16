@@ -326,6 +326,10 @@ class BinLogSocketConnect implements BinLogSocketConnectInterface
             $this->execute('SET @slave_gtid_ignore_duplicates = 0');
         }
 
+        if (0 !== $this->config->getHeartbeatPeriod()) {
+            $this->execute('SET @master_heartbeat_period = ' . ($this->config->getHeartbeatPeriod() * 1000000000));
+        }
+
         if (0 === $binFilePos || '' === $binFileName)
         {
             $master = $this->repository->getMasterStatus();
